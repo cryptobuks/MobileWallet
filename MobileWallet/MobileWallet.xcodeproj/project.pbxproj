@@ -13,6 +13,9 @@
 		AE895F8D1E8F4A5F0022538C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE895F8C1E8F4A5F0022538C /* Assets.xcassets */; };
 		AE895F901E8F4A5F0022538C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE895F8E1E8F4A5F0022538C /* LaunchScreen.storyboard */; };
 		AE895F981E8F4AB10022538C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F971E8F4AB10022538C /* Extension.swift */; };
+		AE895F9A1E8F4C7B0022538C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F991E8F4C7B0022538C /* Person.swift */; };
+		AE895F9C1E8F4CBB0022538C /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F9B1E8F4CBB0022538C /* PersonCell.swift */; };
+		AE895F9E1E8F4CDE0022538C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F9D1E8F4CDE0022538C /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		AE895F8F1E8F4A5F0022538C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE895F911E8F4A5F0022538C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE895F971E8F4AB10022538C /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		AE895F991E8F4C7B0022538C /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		AE895F9B1E8F4CBB0022538C /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		AE895F9D1E8F4CDE0022538C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				AE895F8E1E8F4A5F0022538C /* LaunchScreen.storyboard */,
 				AE895F911E8F4A5F0022538C /* Info.plist */,
 				AE895F971E8F4AB10022538C /* Extension.swift */,
+				AE895F991E8F4C7B0022538C /* Person.swift */,
+				AE895F9B1E8F4CBB0022538C /* PersonCell.swift */,
+				AE895F9D1E8F4CDE0022538C /* DetailViewController.swift */,
 			);
 			path = MobileWallet;
 			sourceTree = "<group>";
@@ -141,7 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE895F881E8F4A5F0022538C /* ViewController.swift in Sources */,
+				AE895F9C1E8F4CBB0022538C /* PersonCell.swift in Sources */,
 				AE895F981E8F4AB10022538C /* Extension.swift in Sources */,
+				AE895F9E1E8F4CDE0022538C /* DetailViewController.swift in Sources */,
+				AE895F9A1E8F4C7B0022538C /* Person.swift in Sources */,
 				AE895F861E8F4A5F0022538C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
