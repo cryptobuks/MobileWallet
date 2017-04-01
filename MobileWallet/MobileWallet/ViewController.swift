@@ -32,6 +32,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.demoData()
         self.setupSubviews()
         self.autolayoutSubviews()
+        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     func demoData() {
@@ -89,19 +91,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         for indexPath in indexPaths {
             self.collectionView!.deselectItem(at: indexPath as IndexPath, animated: false)
             let cell: PersonCell? = self.collectionView!.cellForItem(at: indexPath as IndexPath) as? PersonCell
-            cell?.endEditing(true)
+            cell?.editing = editing
         }
         
         if editing {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: "deleteSelectedItemsAction:")
-            self.longPressGestureRecognizer?.isEnabled = true
         }
         else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: "addItemAction:")
-            self.longPressGestureRecognizer!.isEnabled = false
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
     
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PersonCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
         
@@ -110,12 +111,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         return cell
     }
-
-    /*
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 100)
-    }
-    */
 
     func updateDragAndDropSnapshotView(alpha: CGFloat, center: CGPoint, transform: CGAffineTransform) {
         if self.currentDragAndDropSnapshot != nil {
@@ -143,6 +138,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                     cell!.isMoving = true
                 })
             }
+        case .changed:
+            self.currentDragAndDropSnapshot!.center = currentLocation
+            if indexPathForLocation != nil {
+                let person:Person = self.persons![self.currentDragAndDropIndexPath!.row]
+                self.persons!.remove(at: self.currentDragAndDropIndexPath!.row)
+                self.persons!.insert(person, at: indexPathForLocation!.row)
+                self.collectionView!.moveItem(at: self.currentDragAndDropIndexPath as! IndexPath, to: indexPathForLocation! as IndexPath)
+                self.currentDragAndDropIndexPath = indexPathForLocation
+            }
+            
         default:
             print("default")
             let cell: PersonCell? = self.collectionView!.cellForItem(at: indexPathForLocation! as IndexPath) as? PersonCell
@@ -152,7 +157,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             })
         }
     }
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

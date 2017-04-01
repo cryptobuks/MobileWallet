@@ -12,6 +12,8 @@ class PersonCell: UICollectionViewCell {
     
     var flagImageView: UIImageView?
     var checkboxImageView: UIImageView?
+    var collectionView: UICollectionView?
+    
     
     var editing: Bool = false {
         didSet {
@@ -60,20 +62,36 @@ class PersonCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func autolayoutSubviews() {
-        self.flagImageView!.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 2.0).isActive = true
-        self.flagImageView!.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 2.0).isActive = true
-        self.flagImageView!.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -2.0).isActive = true
-        self.flagImageView!.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -2.0).isActive = true
-    }
-    
     func setupSubviews() {
         self.flagImageView = UIImageView()
         self.flagImageView!.translatesAutoresizingMaskIntoConstraints = false
         self.flagImageView!.contentMode = .scaleAspectFill
         self.flagImageView!.clipsToBounds = true
         self.contentView.addSubview(self.flagImageView!)
+        
+        self.checkboxImageView = UIImageView()
+        self.checkboxImageView!.translatesAutoresizingMaskIntoConstraints = false
+        self.checkboxImageView!.contentMode = .scaleAspectFit
+        self.checkboxImageView!.clipsToBounds = true
+        self.checkboxImageView!.isHidden = true
+        self.checkboxImageView!.image = UIImage(named: "unchecked")
+        self.contentView.addSubview(self.checkboxImageView!)
     }
+    
+    func autolayoutSubviews() {
+        self.flagImageView!.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 2.0).isActive = true
+        self.flagImageView!.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 2.0).isActive = true
+        self.flagImageView!.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -2.0).isActive = true
+        self.flagImageView!.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -2.0).isActive = true
+        
+        self.checkboxImageView!.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        self.checkboxImageView!.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        self.checkboxImageView!.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
+        self.checkboxImageView!.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        
+    }
+    
+
     
     override func prepareForReuse() {
         super.prepareForReuse()
