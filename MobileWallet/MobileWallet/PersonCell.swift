@@ -11,6 +11,39 @@ import UIKit
 class PersonCell: UICollectionViewCell {
     
     var flagImageView: UIImageView?
+    var checkboxImageView: UIImageView?
+    
+    var editing: Bool = false {
+        didSet {
+            self.checkboxImageView!.isHidden = !editing
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if editing {
+                self.checkboxImageView!.image = UIImage(named: isSelected ? "checked" : "unchecked")
+            }
+        }
+    }
+    
+    var isMoving: Bool = false {
+        didSet {
+            self.flagImageView!.alpha = isMoving ? 0.0 : 1.0
+            self.checkboxImageView!.alpha = isMoving ? 0.0 : 1.0
+            self.backgroundColor = isMoving ? UIColor.clear : UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+        }
+    }
+    
+    var snapshot: UIView {
+        let snapshot: UIView = self.snapshotView(afterScreenUpdates: true)!
+        let layer: CALayer = snapshot.layer
+        layer.masksToBounds = false
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -4.0, height: 0.0)
+        return snapshot
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

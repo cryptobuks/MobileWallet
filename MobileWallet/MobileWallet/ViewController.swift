@@ -12,6 +12,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     var collectionView: UICollectionView?
     var persons: [Person]?
+    var longPressGestureRecognizer: UILongPressGestureRecognizer?
+    var currentDragAndDropIndexPath: NSIndexPath?
+    var currentDragAndDropSnapshot: UIView?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -54,6 +57,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.collectionView!.delegate = self
         self.collectionView!.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
         self.collectionView?.backgroundColor = UIColor.white
+        self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressGestureRecognizerAction:")
+        self.longPressGestureRecognizer!.isEnabled = false
+        self.collectionView!.addGestureRecognizer(self.longPressGestureRecognizer!)
+        
         
         self.view.addSubview(self.collectionView!) //don't forget to add this to UI
     }
@@ -74,6 +81,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.collectionView!.allowsMultipleSelection = editing
+        let indexPaths: [NSIndexPath] = self.collectionView!.indexPathsForVisibleItems as [NSIndexPath]
+        
+        for indexPath in indexPaths {
+            self.collectionView!.deselectItem(at: indexPath as IndexPath, animated: false)
+            let cell: PersonCell? = self.collectionView!.cellForItem(at: indexPath as IndexPath) as? PersonCell
+            cell?.endEditing(true)
+        }
+        
+        if editing {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: "deleteSelectedItemsAction:")
+            self.longPressGestureRecognizer?.isEnabled = true
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: "addItemAction:")
+            self.longPressGestureRecognizer!.isEnabled = false
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PersonCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
         
@@ -88,6 +116,43 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return CGSize(width: view.frame.width, height: 100)
     }
     */
+
+    func updateDragAndDropSnapshotView(alpha: CGFloat, center: CGPoint, transform: CGAffineTransform) {
+        if self.currentDragAndDropSnapshot != nil {
+            self.currentDragAndDropSnapshot!.alpha = alpha
+            self.currentDragAndDropSnapshot!.center = center
+            self.currentDragAndDropSnapshot!.transform = transform
+        }
+    }
+    
+    func longPressGestureRecognizerAction(sender: UILongPressGestureRecognizer) {
+        let currentLocation = sender.location(in: self.collectionView!)
+        let indexPathForLocation: NSIndexPath? = self.collectionView!.indexPathForItem(at: currentLocation) as NSIndexPath?
+        
+        switch sender.state {
+        case .began:
+            if indexPathForLocation != nil {
+                self.currentDragAndDropIndexPath = indexPathForLocation
+                let cell: PersonCell? = self.collectionView!.cellForItem(at: indexPathForLocation as! IndexPath) as! PersonCell?
+                self.currentDragAndDropSnapshot = cell!.snapshot
+                self.updateDragAndDropSnapshotView(alpha: 0.0, center: cell!.center, transform: CGAffineTransform.identity)
+                self.collectionView!.addSubview(self.currentDragAndDropSnapshot!)
+                
+                UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                    self.updateDragAndDropSnapshotView(alpha: 0.95, center: cell!.center, transform: CGAffineTransform(scaleX: 1.05, y: 1.05))
+                    cell!.isMoving = true
+                })
+            }
+        default:
+            print("default")
+            let cell: PersonCell? = self.collectionView!.cellForItem(at: indexPathForLocation! as IndexPath) as? PersonCell
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                self.updateDragAndDropSnapshotView(alpha: 0.0, center: cell!.center, transform: CGAffineTransform.identity)
+                cell!.isMoving = false
+            })
+        }
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
