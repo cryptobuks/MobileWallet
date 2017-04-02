@@ -37,16 +37,6 @@ class PersonCell: UICollectionViewCell {
         }
     }
     
-    var snapshot: UIView {
-        let snapshot: UIView = self.snapshotView(afterScreenUpdates: true)!
-        let layer: CALayer = snapshot.layer
-        layer.masksToBounds = false
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: -4.0, height: 0.0)
-        return snapshot
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
@@ -60,6 +50,16 @@ class PersonCell: UICollectionViewCell {
         self.setupSubviews()
         self.autolayoutSubviews()
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    var snapshot: UIView {
+        let snapshot: UIView = self.snapshotView(afterScreenUpdates: true)!
+        let layer: CALayer = snapshot.layer
+        layer.masksToBounds = false
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.5
+        layer.shadowOffset = CGSize(width: -4.0, height: 0.0)
+        return snapshot
     }
     
     func setupSubviews() {
@@ -91,12 +91,9 @@ class PersonCell: UICollectionViewCell {
         
     }
     
-
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.flagImageView!.image = nil
     }
     
-
 }

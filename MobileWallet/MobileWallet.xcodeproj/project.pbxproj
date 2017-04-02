@@ -16,6 +16,7 @@
 		AE895F9A1E8F4C7B0022538C /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F991E8F4C7B0022538C /* Person.swift */; };
 		AE895F9C1E8F4CBB0022538C /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F9B1E8F4CBB0022538C /* PersonCell.swift */; };
 		AE895F9E1E8F4CDE0022538C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F9D1E8F4CDE0022538C /* DetailViewController.swift */; };
+		AE895FA01E9082150022538C /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE895F9F1E9082150022538C /* MenuBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		AE895F991E8F4C7B0022538C /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		AE895F9B1E8F4CBB0022538C /* PersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		AE895F9D1E8F4CDE0022538C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		AE895F9F1E9082150022538C /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				AE895F991E8F4C7B0022538C /* Person.swift */,
 				AE895F9B1E8F4CBB0022538C /* PersonCell.swift */,
 				AE895F9D1E8F4CDE0022538C /* DetailViewController.swift */,
+				AE895F9F1E9082150022538C /* MenuBar.swift */,
 			);
 			path = MobileWallet;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				AE895F881E8F4A5F0022538C /* ViewController.swift in Sources */,
 				AE895F9C1E8F4CBB0022538C /* PersonCell.swift in Sources */,
+				AE895FA01E9082150022538C /* MenuBar.swift in Sources */,
 				AE895F981E8F4AB10022538C /* Extension.swift in Sources */,
 				AE895F9E1E8F4CDE0022538C /* DetailViewController.swift in Sources */,
 				AE895F9A1E8F4C7B0022538C /* Person.swift in Sources */,

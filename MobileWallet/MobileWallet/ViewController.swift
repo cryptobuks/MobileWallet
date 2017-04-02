@@ -59,10 +59,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.collectionView!.delegate = self
         self.collectionView!.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
         self.collectionView?.backgroundColor = UIColor.white
-        self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressGestureRecognizerAction:")
+        self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("longPressGestureRecognizerAction:")))
         self.longPressGestureRecognizer!.isEnabled = false
         self.collectionView!.addGestureRecognizer(self.longPressGestureRecognizer!)
-        
         
         self.view.addSubview(self.collectionView!) //don't forget to add this to UI
     }
@@ -95,7 +94,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         if editing {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: "deleteSelectedItemsAction:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: Selector("deleteSelectedItemsAction:"))
         }
         else {
             self.navigationItem.rightBarButtonItem = nil
@@ -121,6 +120,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func longPressGestureRecognizerAction(sender: UILongPressGestureRecognizer) {
+        print("longPressGestureRecognizerAction called: ")
         let currentLocation = sender.location(in: self.collectionView!)
         let indexPathForLocation: NSIndexPath? = self.collectionView!.indexPathForItem(at: currentLocation) as NSIndexPath?
         
@@ -149,7 +149,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
             
         default:
-            print("default")
             let cell: PersonCell? = self.collectionView!.cellForItem(at: indexPathForLocation! as IndexPath) as? PersonCell
             UIView.animate(withDuration: 0.25, animations: { () -> Void in
                 self.updateDragAndDropSnapshotView(alpha: 0.0, center: cell!.center, transform: CGAffineTransform.identity)
