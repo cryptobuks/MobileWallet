@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "37EDB7B6C4B42A203D8FA164797269768FFD85DC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "37EDB7B6C4B42A203D8FA164797269768FFD85DC" : 9223372036854775807,
+    "9073576B810866E24E45D4FD0009E4E07B491D30" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "30F47187-A64E-4EB8-A770-5E31735F1B52",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "37EDB7B6C4B42A203D8FA164797269768FFD85DC" : "MobileWallet\/",
+    "9073576B810866E24E45D4FD0009E4E07B491D30" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MenuBarYoutube",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MenuBarYoutube\/MenuBarYoutube.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/stratigoster\/MobileWallet",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "37EDB7B6C4B42A203D8FA164797269768FFD85DC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/stratigoster\/LetsWatchAMovie.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9073576B810866E24E45D4FD0009E4E07B491D30"
+    }
+  ]
+}

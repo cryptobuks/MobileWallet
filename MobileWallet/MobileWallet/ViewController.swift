@@ -16,9 +16,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var currentDragAndDropIndexPath: NSIndexPath?
     var currentDragAndDropSnapshot: UIView?
     
+    let titles = ["Payment", "Loyalty", "Gift"]
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.demoData()
+    }
+    
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    fileprivate func setupMenuBar() {
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat("H:|[v0(100)]|", views: menuBar)
+        view.addConstraintsWithFormat("V:|[v0(50)]", views: menuBar)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -29,10 +42,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        setupMenuBar()
         self.demoData()
         self.setupSubviews()
         self.autolayoutSubviews()
-        
         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
@@ -50,7 +63,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         flowLayout.minimumInteritemSpacing = 10.0
         flowLayout.minimumLineSpacing = 10.0
         flowLayout.sectionInset = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)
-        flowLayout.itemSize = CGSize(width: 145.0, height: 97.0)
+        flowLayout.itemSize = CGSize(width: 290.0, height: 200.0)
         //flowLayout.scrollDirection = .horizontal
             
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
@@ -59,8 +72,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.collectionView!.delegate = self
         self.collectionView!.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
         self.collectionView?.backgroundColor = UIColor.white
-        self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("longPressGestureRecognizerAction:")))
-        self.longPressGestureRecognizer!.isEnabled = false
+        
+        self.longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(_:)))
+        
+        self.longPressGestureRecognizer!.isEnabled = true
         self.collectionView!.addGestureRecognizer(self.longPressGestureRecognizer!)
         
         self.view.addSubview(self.collectionView!) //don't forget to add this to UI
@@ -95,13 +110,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         if editing {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: Selector("deleteSelectedItemsAction:"))
+            self.longPressGestureRecognizer!.isEnabled = true
         }
         else {
             self.navigationItem.rightBarButtonItem = nil
+            self.longPressGestureRecognizer!.isEnabled = false
         }
     }
     
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: PersonCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
         
@@ -119,8 +135,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
-    func longPressGestureRecognizerAction(sender: UILongPressGestureRecognizer) {
-        print("longPressGestureRecognizerAction called: ")
+     func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+        print("longPressGestureRecognizerAction:")
         let currentLocation = sender.location(in: self.collectionView!)
         let indexPathForLocation: NSIndexPath? = self.collectionView!.indexPathForItem(at: currentLocation) as NSIndexPath?
         

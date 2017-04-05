@@ -1,10 +1,11 @@
 //
 //  PersonCell.swift
-//  MobileWallet
+//  MenuBarYoutube
 //
-//  Created by xszhao on 2017-03-31.
+//  Created by xszhao on 2017-04-02.
 //  Copyright © 2017 xszhao. All rights reserved.
 //
+
 
 import UIKit
 
@@ -24,7 +25,7 @@ class PersonCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if editing {
-                self.checkboxImageView!.image = UIImage(named: isSelected ? "checked" : "unchecked") 
+                self.checkboxImageView!.image = UIImage(named: isSelected ? "checked" : "unchecked")
             }
         }
     }
@@ -94,7 +95,6 @@ class PersonCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.flagImageView!.image = nil
-        self.checkboxImageView!.isHidden = true
     }
     
 }
