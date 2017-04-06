@@ -18,6 +18,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     let titles = ["Payment", "Loyalty", "Gift"]
     
+    fileprivate func setTitleForIndex(_ index: Int) {
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = "  \(titles[index])"
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.demoData()
